@@ -29,9 +29,9 @@ W projekcie nie są wykorzystywane zapytania HTTP, lecz klasa CarSerializer (api
 Gdyby zapytanie miało się odbywać z osobnego serwisu można użyć do tego bardzo prostej biblioteki [requests](https://requests.readthedocs.io/en/master/).
 Przykładowo:
 
-'''python
+```python
 import requests
 
 r = requests.get('http://0.0.0.0:8008/api/cars/1/')
 data = r.json()
-'''
+```
