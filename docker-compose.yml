@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: cars
+      POSTGRES_USER: car
+      POSTGRES_PASSWORD: car
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+  db_project:
+    build: .
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8008"
+    ports:
+      - 8008:8008
+    volumes:
+      - .:/bazy_danych
+    env_file:
+      - ./dev.env
+    depends_on:
+      - db
+      - mongo
+
+
+volumes:
+  postgres_data:
+  static_files:
+  media:
+  logs:
