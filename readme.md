@@ -36,6 +36,6 @@ r = requests.get('http://0.0.0.0:8008/api/cars/1/')
 data = r.json()
 ```
 Wynik:
-```json
+```javascript
 {'manufacturer': 1, 'name': 'Series 3', 'engine': 'D', 'displacement': 1997, 'power': 136}
 ``` 
